@@ -1,0 +1,122 @@
+package web
+
+templ HomePage() {
+	@Base("/") {
+		// Hero
+		<section class="hero-glow max-w-5xl mx-auto px-6 pt-32 pb-20">
+			<div class="inline-block mb-6 px-3 py-1 rounded-full badge-featured text-xs font-medium tracking-wide uppercase">
+				Available for new opportunities
+			</div>
+			<h1 class="text-6xl md:text-8xl font-extrabold text-gradient-amber tracking-tight leading-none">
+				Kole Tackney
+			</h1>
+			<p class="text-xl md:text-2xl text-neutral-400 mt-4 font-medium">
+				Software Developer &mdash; <span class="text-amber-400/80">Robotics, Systems &amp; Full-Stack</span>
+			</p>
+			<p class="mt-8 text-lg text-neutral-400 max-w-2xl leading-relaxed">
+				8+ years building production systems across robotics, embedded, and full-stack domains.
+				From a solo-built dual-cobot robotic cell to cross-platform C++ SDKs powering 13 devices &mdash;
+				I own complex systems end to end.
+			</p>
+			<div class="mt-10 flex flex-wrap gap-4">
+				<a href="/projects" class="btn-primary inline-block py-3 px-8 rounded-lg text-sm tracking-wide">
+					View Projects
+				</a>
+				<a href="mailto:kole.tackney@outlook.com" class="btn-secondary inline-block py-3 px-8 rounded-lg text-sm tracking-wide">
+					Get in Touch
+				</a>
+			</div>
+		</section>
+		<div class="section-divider max-w-5xl mx-auto"></div>
+		// Experience Timeline
+		<section class="max-w-5xl mx-auto px-6 py-20">
+			<h2 class="text-3xl font-bold text-white mb-4 text-center">Experience</h2>
+			<p class="text-neutral-500 text-center mb-16 text-sm">Where I've built and shipped</p>
+			<div class="relative">
+				// Vertical line — positioned to run through center of each dot
+				<div class="absolute left-[6px] top-0 bottom-0 w-px timeline-line"></div>
+				// Timeline entries
+				@TimelineCard(TimelineEntry{
+					Company:     "Muskoka Cabinets",
+					Title:       "Lead Robotics Programmer",
+					Dates:       "Aug 2023 – Present",
+					Location:    "Alfred, ON",
+					Description: "Sole technical owner of a production dual-cobot robotic cell for automated cabinet assembly — conceived, designed, built, and commissioned from zero.",
+					Highlights:  []string{"100% throughput increase through software and mechanical optimisation", "Built custom EOAT, rotating indexing table, and 7th-axis linear rails at 10x cost reduction"},
+					Tags:        []string{"Go", "Python", "C++", "Arduino", "React", "HTMX", "CAD", "3D Printing"},
+				})
+				@TimelineCard(TimelineEntry{
+					Company:     "Warner Media / Warner Bros. Discovery",
+					Title:       "Software Developer",
+					Dates:       "Oct 2018 – Dec 2022",
+					Location:    "Ottawa, ON",
+					Description: "Cross-platform C++ SDK supporting ~13 devices powering apps like HBO Max, Crave, Twitch, and Sky set-top boxes.",
+					Highlights:  []string{"50% reduction in CI/CD build times", "Built self-serve preview deployment system for the entire dev team"},
+					Tags:        []string{"C++", "TypeScript", "React", "Jenkins", "AWS", "Elasticsearch"},
+				})
+				@TimelineCard(TimelineEntry{
+					Company:     "REL Controls",
+					Title:       "Building Automation Programmer",
+					Dates:       "Sep 2017 – Oct 2018",
+					Location:    "Ottawa, ON",
+					Description: "HVAC building automation for government and military facilities. Held Secret clearance.",
+					Highlights:  []string{"Deployed to multiple government and military installations", "Built strong hardware wiring foundations applied in later robotics work"},
+					Tags:        []string{"Building Automation", "HVAC", "Secret Clearance"},
+				})
+				@TimelineCard(TimelineEntry{
+					Company:     "Algonquin College",
+					Title:       "Advanced Diploma — Game Development",
+					Dates:       "2012 – 2015",
+					Location:    "Ottawa, ON",
+					Description: "Technically rigorous program covering C++, real-time systems, graphics programming, physics engines, and software architecture.",
+					Highlights:  []string{},
+					Tags:        []string{"C++", "C#", "Graphics", "Physics", "Real-time Systems"},
+				})
+			</div>
+		</section>
+	}
+}
+
+type TimelineEntry struct {
+	Company     string
+	Title       string
+	Dates       string
+	Location    string
+	Description string
+	Highlights  []string
+	Tags        []string
+}
+
+templ TimelineCard(entry TimelineEntry) {
+	<div
+		data-reveal
+		class="relative mb-10 pl-10 opacity-0 translate-y-8 transition-all duration-700 ease-out"
+	>
+		// Dot — always on the left, centered on the vertical line
+		<div class="absolute left-0 top-8 w-3.5 h-3.5 bg-amber-500 rounded-full border-2 border-neutral-950 glow-amber"></div>
+		// Card
+		<div class="glass-card rounded-2xl p-7">
+			<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+				<h3 class="text-lg font-bold text-white">{ entry.Company }</h3>
+				<span class="text-xs text-neutral-500 font-medium tracking-wide">{ entry.Dates }</span>
+			</div>
+			<p class="text-amber-400/90 font-medium text-sm mb-4">{ entry.Title } &middot; { entry.Location }</p>
+			<p class="text-neutral-400 text-sm leading-relaxed mb-5">{ entry.Description }</p>
+			if len(entry.Highlights) > 0 {
+				<ul class="space-y-2 mb-5">
+					for _, h := range entry.Highlights {
+						<li class="text-neutral-300 text-sm flex gap-2.5">
+							<span class="text-amber-500 mt-0.5 text-xs">&#9670;</span>
+							{ h }
+						</li>
+					}
+				</ul>
+			}
+			<div class="flex flex-wrap gap-2">
+				for _, tag := range entry.Tags {
+					<span class="tag-pill text-xs text-neutral-400 px-2.5 py-1 rounded-full">{ tag }</span>
+				}
+			</div>
+		</div>
+	</div>
+}

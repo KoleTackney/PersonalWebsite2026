@@ -1,0 +1,62 @@
+package web
+
+templ BlogListPage(posts []Post) {
+	@Base("/blog") {
+		<section class="max-w-3xl mx-auto px-6 pt-32 pb-16">
+			<h1 class="text-4xl font-bold text-white mb-3">Blog</h1>
+			<p class="text-neutral-500 text-lg mb-14">
+				Thoughts on software, robotics, and building things.
+			</p>
+			if len(posts) == 0 {
+				<div class="glass-card rounded-2xl p-10 text-center">
+					<p class="text-neutral-500 text-lg">No posts yet. Check back soon.</p>
+				</div>
+			} else {
+				<div class="space-y-6">
+					for _, post := range posts {
+						@BlogPreview(post)
+					}
+				</div>
+			}
+		</section>
+	}
+}
+
+templ BlogPreview(post Post) {
+	<a href={ templ.SafeURL("/blog/" + post.Slug) } class="block group">
+		<article class="glass-card rounded-2xl p-7">
+			<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+				<h2 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">{ post.Title }</h2>
+				<span class="text-xs text-neutral-500 shrink-0 font-medium tracking-wide">{ post.DateDisplay }</span>
+			</div>
+			<p class="text-neutral-400 text-sm leading-relaxed mb-4">{ post.Description }</p>
+			<div class="flex flex-wrap gap-2">
+				for _, tag := range post.Tags {
+					<span class="tag-pill text-xs text-neutral-400 px-2.5 py-1 rounded-full">{ tag }</span>
+				}
+			</div>
+		</article>
+	</a>
+}
+
+templ BlogPostPage(post Post) {
+	@Base("/blog") {
+		<article class="max-w-3xl mx-auto px-6 pt-32 pb-16">
+			<a href="/blog" class="text-sm text-neutral-500 hover:text-amber-400 transition-colors mb-10 inline-flex items-center gap-1.5">
+				<span>&larr;</span> Back to blog
+			</a>
+			<h1 class="text-4xl font-bold text-white mb-4">{ post.Title }</h1>
+			<div class="flex items-center gap-4 mb-10">
+				<span class="text-neutral-500 text-sm font-medium">{ post.DateDisplay }</span>
+				<div class="flex gap-2">
+					for _, tag := range post.Tags {
+						<span class="tag-pill text-xs text-neutral-400 px-2.5 py-1 rounded-full">{ tag }</span>
+					}
+				</div>
+			</div>
+			<div class="prose prose-invert prose-neutral max-w-none prose-headings:text-white prose-p:text-neutral-300 prose-a:text-amber-400 prose-strong:text-white prose-code:text-amber-300 prose-li:text-neutral-300">
+				@templ.Raw(post.HTML)
+			</div>
+		</article>
+	}
+}
