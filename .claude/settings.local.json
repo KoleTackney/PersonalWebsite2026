@@ -21,7 +21,10 @@
       "Bash(./main.exe)",
       "Bash(just build:*)",
       "Bash(ls:*)",
-      "Bash(grep -E '\\\\.\\(go|templ\\)$')"
+      "Bash(grep -E '\\\\.\\(go|templ\\)$')",
+      "Bash(grep:*)",
+      "Bash(templ generate:*)",
+      "Bash(go build:*)"
     ]
   }
 }

@@ -10,22 +10,22 @@ templ ProjectsPage() {
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 				@ProjectCard(Project{
 					Name:        "SousChef",
-					Description: "AI-powered cooking assistant with recipe generation, a searchable recipe library, user accounts, and a Kitchen Notebook journal. Full-stack app with polished UI.",
-					Tags:        []string{"TypeScript", "React", "ElysiaJS", "Bun", "Tailwind CSS", "SQLite", "Claude API"},
+				Description: "Full-stack AI cooking assistant — deliberately built with ElysiaJS on Bun to stress-test the TypeScript high-DX stack: Eden for end-to-end type safety, Drizzle ORM, TanStack Query, and OpenRouter + Claude Haiku 3.5 for reliable AI tool calling. A personal experiment in comparing paradigms against Go + server-rendered approaches.",
+				Tags:        []string{"TypeScript", "React", "ElysiaJS", "Bun", "Tailwind CSS", "SQLite", "Drizzle ORM", "TanStack Query", "OpenRouter"},
 					Link:        "https://github.com/KoleTackney",
 					LiveURL:     "https://sous-chef.koletackney.dev/",
 					Featured:    true,
 				})
 				@ProjectCard(Project{
 					Name:        "You.i Engine VSCode Extension",
-					Description: "Production VSCode extension for the You.i Engine C++ SDK. Widely used across the development team at Warner Media for daily workflow tooling.",
+					Description: "Production VSCode extension and CLI for the You.i Engine SDK — let the team create, build, and deploy projects across 13 target platforms from one interface. Daily-driver tooling for the entire Warner Media development team.",
 					Tags:        []string{"TypeScript", "VSCode API"},
 					Link:        "https://github.com/KoleTackney",
 					Featured:    false,
 				})
 				@ProjectCard(Project{
 					Name:        "LoRA Stacker CivitAI Tags",
-					Description: "Published ComfyUI custom node that auto-fetches trained trigger words for every LoRA in a stack from the CivitAI API. Caches results locally and passes the stack through unchanged.",
+					Description: "Published ComfyUI custom node on the official ComfyUI Registry that auto-fetches trained trigger words for every LoRA in a stack from the CivitAI API. Caches results locally and passes the stack through unchanged. 67 downloads.",
 					Tags:        []string{"Python", "ComfyUI", "CivitAI API"},
 					Link:        "https://github.com/KoleTackney/lora-stacker-civitai-tags",
 					LiveURL:     "https://registry.comfy.org/publishers/kolet/nodes/lora-stacker-civitai-tags",
@@ -33,14 +33,14 @@ templ ProjectsPage() {
 				})
 				@ProjectCard(Project{
 					Name:        "Short Link",
-					Description: "Personal URL shortener built to experiment with Templ UI. Create and manage short links backed by SQLite. Hosted on Railway.",
+					Description: "URL shortener built with Go + Templ — exploring server-side rendered UI without a JS framework. Templ provides type-safe, compiled HTML templates; the full stack stays in Go from routing to render. Backed by SQLite, hosted on Railway.",
 					Tags:        []string{"Go", "Templ", "SQLite", "Tailwind CSS"},
 					LiveURL:     "https://short.koletackney.dev/",
 					Featured:    false,
 				})
 				@ProjectCard(Project{
 					Name:        "koletackney.dev",
-					Description: "This website. Built with Go, Templ, HTMX, and Tailwind CSS. Server-side rendered with no JS framework. Hosted on Railway.",
+					Description: "Rebuilt from Next.js to Go + Templ + HTMX as a deliberate bet on server-driven UI. No JS framework — Templ handles type-safe templating, HTMX handles interactivity, Go handles everything else. Hosted on Railway.",
 					Tags:        []string{"Go", "Templ", "HTMX", "Tailwind CSS"},
 					Link:        "https://github.com/KoleTackney",
 					Featured:    false,
